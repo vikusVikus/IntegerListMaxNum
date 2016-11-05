@@ -1,0 +1,45 @@
+/*
+There is a list of integers [3, 34, 5, 9, 1, 7]
+Write a function that will return a String value of all number in the list
+arranged in such a way that they will make the biggest number.
+For example list of integers [3, 34, 5, 9, 1, 7] -> 9753431
+ */
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class IntegerListMaxNum {
+    String result = "";
+    public String reArrange(ArrayList<Integer> al) {
+        int max = 0;
+
+        for (Integer e : al) {
+            double tmp = 0;
+            double dif = String.valueOf(max).length() - String.valueOf(e).length();
+
+            tmp = e * Math.pow(10, dif);
+            if (tmp > max) max = e;
+        }
+
+        if (!al.isEmpty()) {
+            result += max;
+            al.remove((Integer)max);
+            reArrange(al);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        IntegerListMaxNum list1 = new IntegerListMaxNum();
+        IntegerListMaxNum list2 = new IntegerListMaxNum();
+        IntegerListMaxNum list3 = new IntegerListMaxNum();
+        ArrayList<Integer> al = new ArrayList<>(Arrays.asList(3, 34, 5, 9, 1, 7));
+        ArrayList<Integer> a2 = new ArrayList<>(Arrays.asList(33, 31, 5, 0, 134, 71));
+        ArrayList<Integer> a3 = new ArrayList<>(Arrays.asList(37, 2, 565, 8, 11, 91));
+
+        System.out.println(list1.reArrange(al));
+        System.out.println(list2.reArrange(a2));
+        System.out.println(list3.reArrange(a3));
+
+    }
+}
